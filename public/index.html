@@ -4,16 +4,19 @@
     <title>basicchat</title>
     <link rel="stylesheet" href="css/bootstrap.readable.css" />
     <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      #msg-form { padding: 3px; position: fixed; bottom: 0; width: 100%; }
-
-      /*#messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; } */
+      /* pin the message box to the bottom */
+      #msg-form {
+        padding: 3px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
       #messages li:nth-child(odd) {
         background: #5bc0de;
         color: white;
       }
+
+      /* make the modal show up in the center of the screen (it was really bothering me when it was near the top) */
       .modal {
         text-align: center;
         padding: 0!important;
@@ -36,8 +39,8 @@
   </head>
   <body>
 
+    <!-- list for messages and form for inputting messages -->
     <ul id="messages" class="list-group"></ul>
-
     <form id="msg-form" class="form-inline">
       <div class="col-xs-10">
         <input class="form-control" id="m" autocomplete="off" style="width: 100%;" placeholder="type your message here..."/>
@@ -47,6 +50,7 @@
       </div>
     </form>
 
+    <!-- modal for entering your name -->
     <div id="username-modal" class="modal">
       <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -70,9 +74,11 @@
     </script>
     <script src="js/bootstrap.js"></script>
     <script type="text/javascript">
+      // prompt the user for their name
       $("#username-modal").modal({ show: true, backdrop: 'static' });
       $("#name").focus();
 
+      // grab thier name form the form. if they don't input anything, make them!!!
       var username = null;
       $("#name-form").submit(function(e) {
         var name = $("#name").val();

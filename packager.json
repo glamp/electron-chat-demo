@@ -1,6 +1,6 @@
 {
   "osx" : {
-    "title": "Chat",
+    "title": "KoalaChat",
     "background": "resources/background-generic.png",
     "icon": "resources/app.icns",
     "icon-size": 80,

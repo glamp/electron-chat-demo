@@ -1,8 +1,8 @@
 {
-  "name": "electron-chat",
-  "productName": "Chat",
-  "appBundleId": "com.glamp.chat",
-  "helperBundleId": "com.glamp.chat.helper",
+  "name": "electron-koalachat",
+  "productName": "KoalaChat",
+  "appBundleId": "com.glamp.koalachat",
+  "helperBundleId": "com.glamp.koalachat.helper",
   "version": "0.1.0",
   "main": "main.js",
   "dependencies": {
