@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>basicchat</title>
+    <link rel="stylesheet" href="css/bootstrap.readable.css" />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      #msg-form { padding: 3px; position: fixed; bottom: 0; width: 100%; }
+
+      /*#messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; } */
+      #messages li:nth-child(odd) {
+        background: #5bc0de;
+        color: white;
+      }
+      .modal {
+        text-align: center;
+        padding: 0!important;
+      }
+
+      .modal:before {
+        content: '';
+        display: inline-block;
+        height: 80%;
+        vertical-align: middle;
+        margin-right: -4px; /* Adjusts for spacing */
+      }
+
+      .modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+
+    <ul id="messages" class="list-group"></ul>
+
+    <form id="msg-form" class="form-inline">
+      <div class="col-xs-10">
+        <input class="form-control" id="m" autocomplete="off" style="width: 100%;" placeholder="type your message here..."/>
+      </div>
+      <div class="col-xs-2">
+        <button class="btn btn-primary btn-block">Send</button>
+      </div>
+    </form>
+
+    <div id="username-modal" class="modal">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Who are you?</h4>
+          </div>
+          <div class="modal-body">
+            <form id="name-form" class="form-inline">
+              <div class="form-group">
+                <input id="name" class="form-control" type="text" placeholder="i.e. John, Sarah, Maria"/>
+              </div>
+              <button type="submit" type="button" class="btn btn-primary">OK</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      // You have to load jQuery a little differently for some reason...
+      global.$ = jQuery = require('jquery');
+    </script>
+    <script src="js/bootstrap.js"></script>
+    <script type="text/javascript">
+      $("#username-modal").modal({ show: true, backdrop: 'static' });
+      $("#name").focus();
+
+      var username = null;
+      $("#name-form").submit(function(e) {
+        var name = $("#name").val();
+        if (name) {
+          username = name;
+          $("#username-modal").modal('hide');
+          $("#m").focus();
+        }
+        $("#name").focus();
+        return false;
+      });
+
+      // Since we're not serving this page from a server, you can't load the
+      // socket.io client from <script src="/socket.io/socket.io.js"
+      var socket = require('socket.io-client')('http://localhost:3000');
+      // When the user hits <enter>, we'll shoot the message they typed to our
+      // server and reset the input message to ''.
+      $('#msg-form').submit(function() {
+        var data = {
+          username: username,
+          msg: $("#m").val()
+        }
+        socket.emit('chat message', data);
+        $("#m").val('');
+        $("#m").focus();
+        return false;
+      });
+
+      // The server will emit back to every connected client with a new message.
+      // So for simplicity we'll just handle each message (even our own) on the
+      // "receiving end" instead of on the "sending end" (above).
+      socket.on('chat message', function(data){
+        $('#messages').append($('<li class="list-group-item lead">').text('[' + data.username + '] : ' + data.msg));
+      });
+
+    </script>
+  </body>
+</html>
