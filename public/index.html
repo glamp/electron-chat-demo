@@ -87,7 +87,8 @@
 
       // Since we're not serving this page from a server, you can't load the
       // socket.io client from <script src="/socket.io/socket.io.js"
-      var socket = require('socket.io-client')('http://localhost:3000');
+      // var socket = require('socket.io-client')('http://localhost:3000');
+      var socket = require('socket.io-client')('https://electron-chat-server.herokuapp.com/');
       // When the user hits <enter>, we'll shoot the message they typed to our
       // server and reset the input message to ''.
       $('#msg-form').submit(function() {
