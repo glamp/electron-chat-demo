@@ -1,15 +1,26 @@
 {
-  "name": "demo-app",
+  "name": "electron-chat",
+  "productName": "Chat",
+  "appBundleId": "com.glamp.chat",
+  "helperBundleId": "com.glamp.chat.helper",
   "version": "0.1.0",
   "main": "main.js",
   "dependencies": {
-    "electron-prebuilt": "^0.36.7",
+    "colors": "^1.1.2",
+    "electron-prebuilt": "^0.36.5",
     "jquery": "^2.2.0",
     "socket.io": "^1.4.5",
     "socket.io-client": "^1.4.5"
   },
   "description": "A demo Electron app.",
-  "devDependencies": {},
+  "devDependencies": {
+    "async": "^1.5.2",
+    "electron-packager": "^5.2.1",
+    "lodash": "^3.10.1",
+    "minimist": "^1.2.0",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.5.2"
+  },
   "scripts": {
     "test": "echo tests are for suckers"
   },
