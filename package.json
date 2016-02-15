@@ -1,8 +1,8 @@
 {
-  "name": "electron-koalachat",
-  "productName": "KoalaChat",
-  "appBundleId": "com.glamp.koalachat",
-  "helperBundleId": "com.glamp.koalachat.helper",
+  "name": "electron-birdchat",
+  "productName": "BirdChat",
+  "appBundleId": "com.glamp.birdchat",
+  "helperBundleId": "com.glamp.birdchat.helper",
   "version": "0.1.0",
   "main": "main.js",
   "dependencies": {
